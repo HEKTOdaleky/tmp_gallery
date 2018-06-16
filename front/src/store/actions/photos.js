@@ -1,9 +1,12 @@
 import axios from "../../axios-api";
 import {push} from "react-router-redux";
-import {FETCH_PHOTO_SUCCESS} from "./actionTypes";
+import {CURRENT_USER, FETCH_PHOTO_SUCCESS} from "./actionTypes";
 
 const fetchPhotoSuccess = photo => {
     return {type: FETCH_PHOTO_SUCCESS, photo};
+};
+const currentUser = user => {
+    return {type: CURRENT_USER, user};
 };
 
 export const getPhoto = ()=>{
@@ -20,10 +23,14 @@ export const getPhoto = ()=>{
 };
 
 export const getPhotoById = (id) => {
+
     return dispatch => {
-        axios.get('/photos?prof='+id).then(
+        axios.get('/photos/'+id).then(
             response => {
-                dispatch(fetchPhotoSuccess(response.data))
+                dispatch(fetchPhotoSuccess(response.data));
+                dispatch(currentUser(id));
+                dispatch(push('/users'));
+
             }
         );
     }
@@ -41,4 +48,19 @@ export const sendPhoto = data => {
             }
         )
     };
+};
+
+export const deletePhoto = (photo) => {
+
+    return dispatch => {
+         axios.delete('/photos/' + photo)
+            .then(response => {
+                console.log("Delete");
+                dispatch(push('/'));
+
+
+            },err=>{
+                alert("Вы не можете удалить чужой товар")
+            });
+    }
 };

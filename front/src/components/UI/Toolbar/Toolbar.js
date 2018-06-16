@@ -5,7 +5,7 @@ import {LinkContainer} from "react-router-bootstrap";
 import UserMenu from "./Menus/UserMenu";
 import AnonymousMenu from "./Menus/AnonymousMenu";
 
-const Toolbar = ({user, logout,facebook}) => (
+const Toolbar = ({user, logout,facebook,allPhotos}) => (
   <Navbar>
     <Navbar.Header>
       <Navbar.Brand>
@@ -16,7 +16,7 @@ const Toolbar = ({user, logout,facebook}) => (
     <Navbar.Collapse>
       <Nav>
         <LinkContainer to="/" exact>
-          <NavItem>Products</NavItem>
+          <NavItem onClick={allPhotos}>AllPhotos</NavItem>
         </LinkContainer>
       </Nav>
 

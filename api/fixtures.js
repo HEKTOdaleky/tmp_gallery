@@ -3,6 +3,8 @@ const config = require('./config');
 
 
 const User = require('./models/User');
+const Photo = require('./models/Photo');
+
 
 mongoose.connect(config.db.url + '/' + config.db.name);
 
@@ -12,6 +14,7 @@ const db = mongoose.connection;
 db.once('open', async () => {
     try {
         await db.dropCollection('users');
+        await db.dropCollection('photos');
     } catch (e) {
         console.log('Collections were not present, skipping drop...');
     }
@@ -30,19 +33,19 @@ db.once('open', async () => {
         displayName: "Второй"
     });
 
-    await Product.create({
+    await Photo.create({
             title: 'Hello World',
             image: 'HelloWorld.jpg',
-            author: userIgor._id
+            user: userIgor._id
         }, {
             title: 'Bad',
             image: 'bad.jpg',
-            author: userAlex._id
+            user: userAlex._id
         },
         {
             title: 'Fish',
             image: 'fish.jpg',
-            author: userAlex._id
+            user: userAlex._id
         });
 
     db.close();

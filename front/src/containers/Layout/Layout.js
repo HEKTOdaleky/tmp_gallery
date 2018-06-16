@@ -6,12 +6,13 @@ import 'react-notifications/lib/notifications.css';
 import './Layout.css';
 import Toolbar from "../../components/UI/Toolbar/Toolbar";
 import {facebookLogin, logoutUser} from "../../store/actions/users";
+import {getPhoto} from "../../store/actions/photos";
 
 const Layout = props => (
     <Fragment>
         <NotificationContainer/>
         <header>
-            <Toolbar user={props.user} logout={() => alert("Фигу")} facebook={props.facebookLogin}/>
+            <Toolbar allPhotos={props.getPhoto} user={props.user} logout={() => alert("Фигу")} facebook={props.facebookLogin}/>
         </header>
         <main className="container">
             {props.children}
@@ -24,7 +25,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    facebookLogin: (data) => dispatch(facebookLogin(data))
+    facebookLogin: (data) => dispatch(facebookLogin(data)),
+    getPhoto: () => dispatch(getPhoto())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Layout);

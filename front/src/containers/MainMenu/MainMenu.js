@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {getPhoto} from "../../store/actions/photos";
+import {getPhoto, getPhotoById} from "../../store/actions/photos";
 import {connect} from 'react-redux';
 import PhotoList from "../../components/PhotoList/PhotoList";
 
@@ -10,7 +10,7 @@ class MainMenu extends Component {
     }
 
     render() {
-        return (<PhotoList photo={this.props.photos}/>)
+        return (<PhotoList photo={this.props.photos} click={this.props.getPhotoById}/>)
     }
 }
 
@@ -20,7 +20,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    getPhoto: () => dispatch(getPhoto())
+    getPhoto: () => dispatch(getPhoto()),
+    getPhotoById: (id) => dispatch(getPhotoById(id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainMenu);
