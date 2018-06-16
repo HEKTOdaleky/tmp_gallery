@@ -12,8 +12,8 @@ const UserMenu = ({user, logout}) => {
   return (
     <Nav pullRight>
       <NavDropdown title={navTitle} id="user-menu">
-        <LinkContainer to="/profile">
-          <MenuItem>Edit profile</MenuItem>
+        <LinkContainer to="/add">
+          <MenuItem>Add Photo</MenuItem>
         </LinkContainer>
         <MenuItem divider />
         <MenuItem onClick={logout}>Logout</MenuItem>

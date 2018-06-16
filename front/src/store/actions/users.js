@@ -5,8 +5,6 @@ import {
     LOGIN_USER_FAILURE,
     LOGIN_USER_SUCCESS,
     LOGOUT_USER,
-    REGISTER_USER_FAILURE,
-    REGISTER_USER_SUCCESS
 } from "./actionTypes";
 
 
@@ -21,8 +19,24 @@ const loginUserFailure = error => {
 };
 
 
+export const logoutUser = () => {
+    return (dispatch,) => {
 
-
+        return axios.delete('/users/sessions').then(
+            response => {
+                dispatch({type: LOGOUT_USER});
+                dispatch(push('/'))
+            }
+        );
+    }
+};
+export const logoutExpiredUser = () => {
+    return dispatch => {
+        dispatch({type: LOGOUT_USER});
+        dispatch(push('/login'));
+        NotificationManager.error('Error', 'Your session has expired, please login again');
+    }
+};
 export const facebookLogin = data => {
     return dispatch => {
         axios.post('/users/facebookLogin', data).then(

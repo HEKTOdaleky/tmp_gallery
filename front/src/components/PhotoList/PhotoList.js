@@ -1,6 +1,7 @@
 import React from 'react';
 import config from "../../config";
-import {Button, Card, CardBody, CardImg, CardTitle} from "reactstrap";
+import { Card, CardBody, CardImg, CardTitle} from "reactstrap";
+import {Button} from "react-bootstrap";
 
 
 const PhotoList = props => {
@@ -16,7 +17,7 @@ const PhotoList = props => {
                             <CardTitle> {item.title}</CardTitle>
                             <CardTitle onClick={() => props.click(item.user._id)}
                                        style={{cursor: "pointer"}}> {item.user.displayName}</CardTitle>
-                            {props.deleteButton ? <Button onClick={() => props.delete(item._id)}>Delete</Button> : null}
+                            {props.deleteButton ? <Button bsStyle="danger" onClick={() => props.delete(item._id)}>Delete</Button> : null}
                         </CardBody>
                     </Card>)
 

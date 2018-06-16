@@ -1,4 +1,4 @@
-import {CURRENT_USER, LOGIN_USER_FAILURE, LOGIN_USER_SUCCESS} from "../actions/actionTypes";
+import {CURRENT_USER, LOGIN_USER_FAILURE, LOGIN_USER_SUCCESS, LOGOUT_USER} from "../actions/actionTypes";
 
 const initialState = {
     loginError: null,
@@ -16,6 +16,8 @@ const reducer = (state = initialState, action) => {
             return {...state, loginError: action.error};
         case CURRENT_USER:
             return {...state, currentUser: action.user};
+        case LOGOUT_USER:
+            return {...state, user: null};
 
         default:
             return state;

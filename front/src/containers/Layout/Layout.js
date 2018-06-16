@@ -12,7 +12,10 @@ const Layout = props => (
     <Fragment>
         <NotificationContainer/>
         <header>
-            <Toolbar allPhotos={props.getPhoto} user={props.user} logout={() => alert("Фигу")} facebook={props.facebookLogin}/>
+            <Toolbar allPhotos={props.getPhoto}
+                     user={props.user}
+                     logout={props.logoutUser}
+                     facebook={props.facebookLogin}/>
         </header>
         <main className="container">
             {props.children}
@@ -26,7 +29,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     facebookLogin: (data) => dispatch(facebookLogin(data)),
-    getPhoto: () => dispatch(getPhoto())
+    getPhoto: () => dispatch(getPhoto()),
+    logoutUser: () => dispatch(logoutUser())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Layout);
