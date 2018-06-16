@@ -4,18 +4,21 @@ import {routerMiddleware, routerReducer} from "react-router-redux";
 import createHistory from "history/createBrowserHistory";
 
 import usersReducer from "./reducers/users";
-import {saveState, loadState} from "./localStorage";
+import photosReducer from "./reducers/photos";
+
+import {loadState, saveState} from "./localStorage";
 
 const rootReducer = combineReducers({
-  users: usersReducer,
-  routing: routerReducer
+    users: usersReducer,
+    photo: photosReducer,
+    routing: routerReducer
 });
 
 export const history = createHistory();
 
 const middleware = [
-  thunkMiddleware,
-  routerMiddleware(history)
+    thunkMiddleware,
+    routerMiddleware(history)
 ];
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -27,9 +30,9 @@ const persistedState = loadState();
 const store = createStore(rootReducer, persistedState, enhancers);
 
 store.subscribe(() => {
-  saveState({
-    users: store.getState().users
-  });
+    saveState({
+        users: store.getState().users
+    });
 });
 
 export default store;

@@ -22,8 +22,22 @@ const router = express.Router();
 
 const createRouter = (db) => {
 
+    router.get('/', (req, res) => {
+            Photo.find().populate('user')
+                .then(results => {
+                    res.send(results)
+                })
+                .catch(() => res.sendStatus(500));
+    });
 
-    // Product create
+    router.get('/:prof', (req, res) => {
+        Photo.find({user:req.params.prof}).populate('user')
+            .then(results => {
+                res.send(results)
+            })
+            .catch(() => res.sendStatus(500));
+    });
+
     router.post('/', upload.single('image'), (req, res) => {
         const data = req.body;
         User.findOne({token:req.get('Token')}).then(result=>{
