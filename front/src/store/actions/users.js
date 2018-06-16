@@ -9,13 +9,6 @@ import {
     REGISTER_USER_SUCCESS
 } from "./actionTypes";
 
-const registerUserSuccess = () => {
-    return {type: REGISTER_USER_SUCCESS};
-};
-
-const registerUserFailure = error => {
-    return {type: REGISTER_USER_FAILURE, error};
-};
 
 
 
