@@ -18,7 +18,7 @@ db.once('open', async () => {
 
 
 
-    await User.create({
+    const [userIgor, userAlex] =await User.create({
         email: "test@test.kg",
         password: 123,
         facebookId: 123,
@@ -29,6 +29,21 @@ db.once('open', async () => {
         facebookId: 123,
         displayName: "Второй"
     });
+
+    await Product.create({
+            title: 'Hello World',
+            image: 'HelloWorld.jpg',
+            author: userIgor._id
+        }, {
+            title: 'Bad',
+            image: 'bad.jpg',
+            author: userAlex._id
+        },
+        {
+            title: 'Fish',
+            image: 'fish.jpg',
+            author: userAlex._id
+        });
 
     db.close();
 });
