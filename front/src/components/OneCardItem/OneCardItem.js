@@ -1,13 +1,43 @@
-import React, {Component} from 'react'
+import React, {Component, Fragment} from 'react'
 import config from "../../config";
 import {Card, CardBody, CardImg, CardTitle} from "reactstrap";
-import {Button} from "react-bootstrap";
+import {Button, Modal} from "react-bootstrap";
 
 class OneCardItem extends Component{
+    state = {
+        show: false
+    };
+
+
+handleClose=()=> {
+    this.setState({ show: false });
+}
+
+handleShow=()=> {
+    this.setState({ show: true });
+}
+
     render(){
         return (
+            <Fragment>
+
+                <Modal show={this.state.show} onHide={this.handleClose}>
+
+                    <Modal.Body>
+                        <CardImg top width="100%" src={config.apiUrl + 'uploads/' + this.props.item.image}
+                                 style={{ marginRight: '10px'}}/>
+                    </Modal.Body>
+
+                </Modal>
             <Card key={this.props.item._id} sm="6">
-                <CardImg top width="100%" src={config.apiUrl + 'uploads/' + this.props.item.image}
+
+
+
+
+
+
+
+                <CardImg onClick={this.handleShow} top width="100%" src={config.apiUrl + 'uploads/' + this.props.item.image}
                          style={{width: '150px', marginRight: '10px'}}/>
                 <CardBody>
                     <CardTitle> {this.props.item.title}</CardTitle>
@@ -16,6 +46,7 @@ class OneCardItem extends Component{
                     {this.props.deleteButton ? <Button bsStyle="danger" onClick={() => this.props.delete(this.props.item._id)}>Delete</Button> : null}
                 </CardBody>
             </Card>
+            </Fragment>
         )
     }
 }
