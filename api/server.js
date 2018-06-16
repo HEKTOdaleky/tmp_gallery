@@ -11,7 +11,6 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
 
-// mongodb://localhost:27017/shop
 mongoose.connect(config.db.url + '/' + config.db.name);
 
 const db = mongoose.connection;

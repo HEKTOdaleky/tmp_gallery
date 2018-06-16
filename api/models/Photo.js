@@ -1,39 +1,24 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
 const SALT_WORK_FACTOR = 10;
 
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
-    email: {
-        type: String,
-        required: true,
-        unique: true,
-        validate: {
-            validator: async function (value) {
-                if (!this.isModified('username')) return true;
-
-                const user = await User.findOne({email: value});
-                if (user) throw new Error('This user already exists');
-                return true;
-            },
-            message: 'This username already exists'
-        }
-    },
-    password: {
-        type: String,
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
         required: true
     },
-    facebookId: {
-        type: String
+    image: {
+        type: String,
+        required: true
+
     },
-    displayName: {
-        type: String
-    },
-    whiteList: {
-        type: Array
-    },
-    token: String
+    title: {
+        type: String,
+        required: true
+    }
+
 });
 
 UserSchema.pre('save', async function (next) {
@@ -56,6 +41,13 @@ UserSchema.methods.checkPassword = function (password) {
     return bcrypt.compare(password, this.password);
 };
 
+UserSchema.methods.generateToken = function () {
+    return jwt.sign(
+        {id: this._id},
+        config.jwt.secret,
+        {expiresIn: config.jwt.expires}
+    );
+};
 
 const User = mongoose.model('User', UserSchema);
 
