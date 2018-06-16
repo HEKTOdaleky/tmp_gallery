@@ -38,8 +38,8 @@ class AddPhoto extends Component {
 
     render() {
         return (
-            <Fragment>
-                <FormGroup controlId="productTitle">
+            <div style={{border:"1px solid black", overflow:"hidden", padding:"35px", marginBottom:"20px"}}>
+                <FormGroup controlId="about">
                     <Col componentClass={ControlLabel} sm={2}>
                         Title
                     </Col>
@@ -62,7 +62,7 @@ class AddPhoto extends Component {
                     />
                 </Col>
                 {this.state.title&&this.state.image?<Button onClick={this.sendData}>Send</Button>:null }
-            </Fragment>
+            </div>
         )
     }
 
