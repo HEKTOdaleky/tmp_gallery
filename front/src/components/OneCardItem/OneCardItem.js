@@ -38,12 +38,16 @@ handleShow=()=> {
 
 
 
-                <CardImg onClick={this.handleShow} top width="100%" src={config.apiUrl + 'uploads/' + this.props.item.image}
+                <CardImg onClick={this.handleShow}
+                         top width="100%"
+                         src={config.apiUrl + 'uploads/' + this.props.item.image}
                          style={{width: '150px', marginRight: '10px'}}/>
                 <CardBody>
                     <CardTitle style={{color:"grey"}}> {this.props.item.title}</CardTitle>
                     <CardTitle  onClick={() => this.props.click(this.props.item.user._id)}
                                style={{cursor: "pointer",fontSize:"25px",fontWeight:'bold'}}> {this.props.item.user.displayName}</CardTitle>
+
+
                     {this.props.deleteButton ? <Button bsStyle="danger" onClick={() => this.props.delete(this.props.item._id)}>Delete</Button> : null}
                 </CardBody>
             </Card>

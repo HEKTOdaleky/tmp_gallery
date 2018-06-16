@@ -23,7 +23,6 @@ const router = express.Router();
 const createRouter = (db) => {
 
     router.get('/', (req, res) => {
-        console.log(req.params.id);
             Photo.find().populate('user')
                 .then(results => {
                     res.send(results)
@@ -32,7 +31,6 @@ const createRouter = (db) => {
     });
 
     router.get('/:id', (req, res) => {
-        console.log(req.params.id);
         Photo.find({user:req.params.id}).populate('user')
             .then(results => {
                 res.send(results)
@@ -64,7 +62,6 @@ const createRouter = (db) => {
 
 
     router.delete('/:id', async (req, res) => {
-        console.log("DELETE")
         const token = req.get('Token');
 
         const id = req.params.id;

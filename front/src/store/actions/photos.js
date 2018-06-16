@@ -55,7 +55,6 @@ export const deletePhoto = (photo) => {
     return dispatch => {
          axios.delete('/photos/' + photo)
             .then(response => {
-                console.log("Delete");
                 dispatch(push('/'));
 
 

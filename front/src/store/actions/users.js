@@ -32,8 +32,8 @@ export const logoutUser = () => {
 };
 export const logoutExpiredUser = () => {
     return dispatch => {
+        dispatch(push('/'));
         dispatch({type: LOGOUT_USER});
-        dispatch(push('/login'));
         NotificationManager.error('Error', 'Your session has expired, please login again');
     }
 };

@@ -11,7 +11,7 @@ class Profile extends Component {
     }
 
     render() {
-        const flag = this.props.user._id === this.props.current;
+        const flag = this.props.user&& (this.props.user._id === this.props.current);
         return (<Fragment>
             <div> {
                 flag ? <AddPhoto/> : null

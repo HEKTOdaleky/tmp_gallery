@@ -1,13 +1,10 @@
 import React from 'react';
-import {Redirect, Route, Switch} from "react-router-dom";
+import { Route, Switch} from "react-router-dom";
 import AddPhoto from "./containers/AddPhoto/AddPhoto";
 import MainMenu from "./containers/MainMenu/MainMenu";
 import Profile from "./containers/Profile/Profile";
 
 
-const ProtectedRoute = ({isAllowed, ...props}) => (
-    isAllowed ? <Route {...props}/> : <Redirect to="/login"/>
-);
 
 const Routes = ({user}) => (
     <Switch>
@@ -15,6 +12,7 @@ const Routes = ({user}) => (
         <Route path="/users" exact component={Profile}/>
 
         <Route path="/add" exact component={AddPhoto}/>
+        <Route render={() => <h1>Not found</h1>}/>
 
     </Switch>
 );
