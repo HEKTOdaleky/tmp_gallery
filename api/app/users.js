@@ -27,7 +27,6 @@ const createRouter = () => {
         try {
 
             const response = await request(debugTokenUrl);
-            console.log("Hello", response)
             const decodedResponse = JSON.parse(response);
 
             if (decodedResponse.data.error) {
